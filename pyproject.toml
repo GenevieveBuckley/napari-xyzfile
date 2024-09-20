@@ -6,7 +6,6 @@ readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
   {name = "Genevieve Buckley"},
-  {email = ""},
 ]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
