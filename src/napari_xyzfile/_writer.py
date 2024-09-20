@@ -10,15 +10,18 @@ Replace code below according to your needs.
 from __future__ import annotations
 
 from collections.abc import Sequence
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, Union
+
+import numpy as np
 
 if TYPE_CHECKING:
     DataType = Union[Any, Sequence[Any]]
     FullLayerData = tuple[DataType, dict, str]
 
 
-def write_single_image(path: str, data: Any, meta: dict) -> list[str]:
-    """Writes a single image layer.
+def write_single_points_layer(path: str, data: Any, meta: dict) -> list[str]:
+    """Writes a single points layer.
 
     Parameters
     ----------
@@ -35,8 +38,7 @@ def write_single_image(path: str, data: Any, meta: dict) -> list[str]:
     [path] : A list containing the string path to the saved file.
     """
 
-    # implement your writer logic here ...
-
+    np.savetxt(path, data)
     # return path to any file(s) that were successfully written
     return [path]
 
@@ -59,8 +61,13 @@ def write_multiple(path: str, data: list[FullLayerData]) -> list[str]:
     -------
     [path] : A list containing (potentially multiple) string paths to the saved file(s).
     """
-
-    # implement your writer logic here ...
-
+    path = Path(path)
+    output_paths = []
+    for layer in data:
+        if layer[-1] == "points":
+            layer_name = layer[1]["name"]
+            output_path = path.with_name(path.stem + "-" + layer_name + ".xyz")
+            write_single_points_layer(output_path, layer[0], meta={})
+            output_paths.append(str(output_path))
     # return path to any file(s) that were successfully written
-    return [path]
+    return output_paths

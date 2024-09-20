@@ -13,7 +13,7 @@ contributions:
       python_name: napari_xyzfile._writer:write_multiple
       title: Save multi-layer data with Napari xyz file reader
     - id: napari-xyzfile.write_single_image
-      python_name: napari_xyzfile._writer:write_single_image
+      python_name: napari_xyzfile._writer:write_single_points_layer
       title: Save image data with Napari xyz file reader
     - id: napari-xyzfile.make_sample_data
       python_name: napari_xyzfile._sample_data:make_sample_data
@@ -21,14 +21,14 @@ contributions:
   readers:
     - command: napari-xyzfile.get_reader
       accepts_directories: false
-      filename_patterns: ['*.npy']
+      filename_patterns: ['*.xyz']
   writers:
     - command: napari-xyzfile.write_multiple
-      layer_types: ['image*','labels*']
+      layer_types: ['points*']
       filename_extensions: []
     - command: napari-xyzfile.write_single_image
-      layer_types: ['image']
-      filename_extensions: ['.npy']
+      layer_types: ['points']
+      filename_extensions: ['.xyz']
   sample_data:
     - command: napari-xyzfile.make_sample_data
       display_name: Napari xyz file reader

@@ -8,9 +8,9 @@ def test_reader(tmp_path):
     """An example of how you might test your plugin."""
 
     # write some fake data using your supported file format
-    my_test_file = str(tmp_path / "myfile.npy")
-    original_data = np.random.rand(20, 20)
-    np.save(my_test_file, original_data)
+    my_test_file = str(tmp_path / "myfile.xyz")
+    original_data = np.random.rand(20, 3)
+    np.savetxt(my_test_file, original_data)
 
     # try to read it back in
     reader = napari_get_reader(my_test_file)
